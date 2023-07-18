@@ -27,6 +27,8 @@ app.use([
 	express.json({ limit: "500mb" }),
 	express.urlencoded({ limit: "500mb", extended: true }), // Set the "extended" option to true
 ]);
-
 // Route
+app.use("/api/v1", require("./src/routes/api")).use("*", (req, res) => {
+	new Error(res, 404, {});
+});
 module.exports = app;
