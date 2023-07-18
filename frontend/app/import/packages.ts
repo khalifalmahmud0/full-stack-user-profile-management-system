@@ -20,7 +20,7 @@ const poppins = Poppins({
 	subsets: ["latin"],
 	variable: "--font-poppins",
 	weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-	display: "fallback"
+	display: "swap"
 });
 // const Fonts = [robotoSlab.variable, poppins.variable].join(" ");
 const Fonts = `${robotoSlab.variable} ${poppins.variable}`;

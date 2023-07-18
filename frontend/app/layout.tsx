@@ -15,7 +15,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
 			<html lang="en" className={Fonts}>
 				<body className="bg-[#272727]">
 					<QueryClientProvider client={queryClient}>
-						<div className="space-y-20">{children}</div>
+						<div className="space-y-10">{children}</div>
 						<ReactQueryDevtools initialIsOpen={false} />
 					</QueryClientProvider>
 				</body>
