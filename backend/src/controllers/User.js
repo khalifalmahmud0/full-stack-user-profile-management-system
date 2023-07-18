@@ -6,18 +6,18 @@ module.exports = {
 	createUser: async (req, res) => {
 		try {
 			const newUser = await User.create(req.body);
-			return Success(res, "User created successfully.", newUser);
+			return new Success(res, 200, newUser);
 		} catch (err) {
-			return Error(res, "Error creating user.", err);
+			return new Error(res, 400, err);
 		}
 	},
 
 	allUsers: async (req, res) => {
 		try {
 			const users = await User.find();
-			return Success(res, "All users fetched successfully.", users);
+			return new Success(res, 200, users);
 		} catch (err) {
-			return Error(res, "Error fetching users.", err);
+			return new Error(res, 400, err);
 		}
 	},
 
@@ -25,11 +25,11 @@ module.exports = {
 		try {
 			const user = await User.findById(req.params.id);
 			if (!user) {
-				return Error(res, "User not found.");
+				return new Error(res, 400);
 			}
-			return Success(res, "User fetched successfully.", user);
+			return new Success(res, 200, user);
 		} catch (err) {
-			return Error(res, "Error fetching user.", err);
+			return new Error(res, 400, err);
 		}
 	},
 
@@ -43,11 +43,11 @@ module.exports = {
 				}
 			);
 			if (!updatedUser) {
-				return Error(res, "User not found.");
+				return new Error(res, 400);
 			}
-			return Success(res, "User updated successfully.", updatedUser);
+			return new Success(res, 200, updatedUser);
 		} catch (err) {
-			return Error(res, "Error updating user.", err);
+			return new Error(res, 400, err);
 		}
 	},
 
@@ -55,11 +55,11 @@ module.exports = {
 		try {
 			const deletedUser = await User.findByIdAndDelete(req.params.id);
 			if (!deletedUser) {
-				return Error(res, "User not found.");
+				return new Error(res, 400);
 			}
-			return Success(res, "User deleted successfully.", deletedUser);
+			return new Success(res, 200, deletedUser);
 		} catch (err) {
-			return Error(res, "Error deleting user.", err);
+			return new Error(res, 400, err);
 		}
 	},
 };
