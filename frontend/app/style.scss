@@ -5,3 +5,6 @@
 .Container {
 	@apply container mx-auto;
 }
+:focus-visible {
+	outline: none;
+}

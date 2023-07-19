@@ -10,6 +10,11 @@ const schema = mongoose.Schema(
 			required: true,
 			unique: true,
 		},
+		gender: {
+			type: String,
+			required: true,
+			default: "male",
+		},
 		phone: {
 			type: String,
 		},

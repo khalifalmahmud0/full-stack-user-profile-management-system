@@ -1,6 +1,5 @@
 "use client";
 import Default from "@/app/layouts/default/default";
-import "./style.scss";
 import { GetData } from "@/app/utils/api/getData";
 import Link from "next/link";
 import Image from "next/image";
@@ -31,25 +30,38 @@ const HomePage = () => {
 					<div className="grid grid-cols-12 gap-6">
 						{data?.result?.success?.map((item: any, index: string) => {
 							return (
-								<div className="col-span-2" key={index}>
-									<Link
-										href={item._id}
-										className="flex items-center flex-col bg-[#323443] rounded-lg justify-center gap-y-4 p-[25px]"
-									>
+								<div
+									className="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-4 2xl:col-span-3 "
+									key={index}
+								>
+									<div className="py-8 px-8 max-w-sm mx-auto bg-white rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6">
 										<Image
-											className="rounded-full"
-											src="/khalif.jpeg"
-											width={150}
-											height={150}
-											alt="Picture of the author"
+											className="block mx-auto h-24 rounded-full sm:mx-0 sm:shrink-0"
+											src={
+												item?.profilePicture
+													? item?.profilePicture
+													: item?.gender === "male"
+													? "/male.svg"
+													: "/female.svg"
+											}
+											alt="Woman's Face"
+											width={100}
+											height={100}
 										/>
-										<div className="flex flex-col items-center">
-											<h1 className="text-white text-lg font-poppins">
-												{item.name}
-											</h1>
-											<p className="text-[#C9C9C9] text-sm ">{item.email}</p>
+										<div className="text-center space-y-2 sm:text-left">
+											<div className="space-y-0.5">
+												<p className="text-lg text-black font-semibold">
+													{item.name}
+												</p>
+												<p className="text-slate-500 font-medium">
+													{item.email}
+												</p>
+											</div>
+											<button className="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">
+												View Profile
+											</button>
 										</div>
-									</Link>
+									</div>
 								</div>
 							);
 						})}
