@@ -199,42 +199,49 @@ const AddUserForm: React.FC = () => {
 							</div>
 						</div>
 					</div>
-					{/* ...............  */}
-					<div className="flex items-center space-x-6 mt-7">
-						<div className="shrink-0">
-							<Image
-								src={
-									profilePictureBase64
-										? profilePictureBase64
-										: gender === "male"
-										? "/male.svg"
-										: "/female.svg"
-								}
-								alt="Profile Preview"
-								className="rounded-full w-[80px] h-[80px]"
-								width={100}
-								height={100}
-							/>
-						</div>
-						<label className="block">
-							<span className="sr-only">Choose profile photo</span>
-							<input
-								type="file"
-								className="block w-full text-sm text-slate-500
+
+					{/* Profile Picture  */}
+					<div className="sm:col-span-2 mt-6">
+						<label
+							htmlFor="biography"
+							className="block text-sm font-semibold leading-6 text-gray-900"
+						>
+							Profile Picture
+						</label>
+						<div className="flex items-center space-x-2 ">
+							<div className="shrink-0">
+								<Image
+									src={
+										profilePictureBase64
+											? profilePictureBase64
+											: "/blank-avatar.jpeg"
+									}
+									alt="Profile Preview"
+									className="rounded-full w-[80px] h-[80px]"
+									width={100}
+									height={100}
+								/>
+							</div>
+							<label className="block">
+								<span className="sr-only">Choose profile photo</span>
+								<input
+									type="file"
+									className="block w-full text-sm text-slate-500
       file:mr-4 file:py-2 file:px-4
       file:rounded-full file:border-0
       file:text-sm file:font-semibold
       file:bg-violet-50 file:text-violet-700
       hover:file:bg-violet-100
     "
-								id="profilePicture"
-								name="profilePicture"
-								accept="image/*"
-								onChange={handleProfilePictureChange}
-							/>
-						</label>
+									id="profilePicture"
+									name="profilePicture"
+									accept="image/*"
+									onChange={handleProfilePictureChange}
+								/>
+							</label>
+						</div>
 					</div>
-					{/* ........................  */}
+
 					{/* Submit Button  */}
 					<div className="mt-10">
 						<button
