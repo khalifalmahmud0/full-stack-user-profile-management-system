@@ -1,11 +1,7 @@
-import { ReactNode } from "@/app/import/packages";
-import Footer from "@/app/components/common/footer/footer";
-import Header from "@/app/components/common/header/header";
+import Footer from "../../components/common/footer/footer";
+import Header from "../../components/common/header/header";
 
-interface DefaultProps {
-	children: ReactNode;
-}
-const Default: React.FC<DefaultProps> = ({ children }) => {
+const Default = ({ children }) => {
 	return (
 		<>
 			<div className="min-h-screen relative">

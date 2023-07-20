@@ -3,21 +3,19 @@ import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import axios from "axios";
 import Image from "next/image";
-import cogoToast from "cogo-toast";
+import cogoToast from "@successtar/cogo-toast";
 import "./addUserForm.scss";
-import moment from "moment";
-const AddUserForm: React.FC = () => {
-	const createUserMutation = useMutation((newUserData: any) =>
+
+const AddUserForm = () => {
+	const createUserMutation = useMutation((newUserData) =>
 		axios.post("http://localhost:5000/api/v1/create-user", newUserData, {})
 	);
 	const [showSuccessToast, setShowSuccessToast] = useState(false);
 	const [showErrorToast, setShowErrorToast] = useState(false);
-	const [profilePictureBase64, setProfilePictureBase64] = useState<string>("");
-	const [gender, setGender] = useState<string>("male");
+	const [profilePictureBase64, setProfilePictureBase64] = useState("");
+	const [gender, setGender] = useState("male");
 
-	const handleProfilePictureChange = (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => {
+	const handleProfilePictureChange = (event) => {
 		const file = event.target.files?.[0];
 		if (file) {
 			const reader = new FileReader();
@@ -30,11 +28,11 @@ const AddUserForm: React.FC = () => {
 		}
 	};
 
-	const handleGenderChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+	const handleGenderChange = (event) => {
 		setGender(event.target.value);
 	};
 
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
 		const newUserData = {

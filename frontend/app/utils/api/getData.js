@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 
-export const fetchData = async (url:string) => {
+export const fetchData = async (url) => {
 	try {
 		const response = await axios.get(url);
 		return response.data;
@@ -10,6 +10,6 @@ export const fetchData = async (url:string) => {
 	}
 };
 
-export const GetData = (key:string, url:string) => {
+export const GetData = (key, url) => {
 	return useQuery(key, () => fetchData(url));
 };

@@ -1,8 +1,7 @@
-import React from "react";
-import Default from "@/app/layouts/default/default";
-import AddUserForm from "@/app/components/addUserForm/addUserForm";
+import AddUserForm from "../../components/addUserForm/addUserForm";
+import Default from "../../layouts/default/default";
 
-const AddUser: React.FC = () => {
+const AddUser = () => {
 	return (
 		<>
 			<Default>

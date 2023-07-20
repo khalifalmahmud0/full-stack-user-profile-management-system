@@ -1,21 +1,30 @@
 "use client";
-import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import Swal from "sweetalert2";
-import { useMutation } from "react-query";
-import Default from "@/app/layouts/default/default";
-import { GetData } from "@/app/utils/api/getData";
 import Image from "next/image";
-import axios from "axios";
-import cogoToast from "cogo-toast";
-
+import Default from "../../../layouts/default/default";
 import Link from "next/link";
-const UserDetailsPage = ({ params }: any) => {
+import { GetData } from "../../../utils/api/getData";
+import { useMutation } from "react-query";
+import Swal from "sweetalert2";
+import cogoToast from "@successtar/cogo-toast";
+import axios from "axios";
+import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
+// import React, { useEffect, useState } from "react";
+// import Swal from "sweetalert2";
+// import { useMutation } from "react-query";
+// import Default from "@/app/layouts/default/default";
+// import { GetData } from "@/app/utils/api/getData";
+// import Image from "next/image";
+// import axios from "axios";
+// import cogoToast from "cogo-toast";
+// import Link from "next/link";
+const UserDetailsPage = ({ params }) => {
 	const { data } = GetData(
 		"users",
 		process.env.NEXT_PUBLIC_API_URL + "single-user/" + params.id
 	);
-	const deleteUserMutation = useMutation((userId: any) => {
+	const deleteUserMutation = useMutation((userId) => {
 		return axios.delete(`http://localhost:5000/api/v1/delete-user/${userId}`);
 	});
 	//
