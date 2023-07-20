@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import axios from "axios";
 import Image from "next/image";
-import cogoToast from "@successtar/cogo-toast";
+import cogoToast from "cogo-toast";
 import "./addUserForm.scss";
 const AddUserForm: React.FC = () => {
 	const createUserMutation = useMutation((newUserData: any) =>

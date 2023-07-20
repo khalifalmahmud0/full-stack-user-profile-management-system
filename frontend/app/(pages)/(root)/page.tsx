@@ -14,7 +14,7 @@ const HomePage = () => {
 		"users",
 		process.env.NEXT_PUBLIC_API_URL + "users"
 	);
-	console.log(data);
+
 
 	return (
 		<Default>

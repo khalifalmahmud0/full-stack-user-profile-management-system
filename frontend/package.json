@@ -9,12 +9,12 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@successtar/cogo-toast": "^5.0.6",
 		"@types/node": "20.4.1",
 		"@types/react": "18.2.14",
 		"@types/react-dom": "18.2.6",
 		"autoprefixer": "10.4.14",
 		"axios": "^1.4.0",
+		"cogo-toast": "^4.2.3",
 		"eslint": "8.44.0",
 		"eslint-config-next": "13.4.9",
 		"next": "13.4.9",
@@ -26,6 +26,7 @@
 		"react-query": "^3.39.3",
 		"react-responsive-modal": "^6.4.2",
 		"sass": "^1.63.6",
+		"sweetalert2": "^11.7.18",
 		"tailwindcss": "3.3.2",
 		"typescript": "5.1.6"
 	}
