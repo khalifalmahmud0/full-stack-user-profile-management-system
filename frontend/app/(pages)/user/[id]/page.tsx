@@ -8,6 +8,8 @@ import { GetData } from "@/app/utils/api/getData";
 import Image from "next/image";
 import axios from "axios";
 import cogoToast from "cogo-toast";
+
+import Link from "next/link";
 const UserDetailsPage = ({ params }: any) => {
 	const { data } = GetData(
 		"users",
@@ -36,6 +38,7 @@ const UserDetailsPage = ({ params }: any) => {
 		showErrorToast,
 	]);
 	//
+
 	const handleDeleteClick = () => {
 		Swal.fire({
 			title: "Are you sure?",
@@ -79,7 +82,7 @@ const UserDetailsPage = ({ params }: any) => {
 								/>
 							</div>
 							<div className="col-span-4 flex justify-end">
-								<button>Edit</button>
+								<Link href={`/user/edit/${params.id}`}>Edit</Link>
 								<button onClick={handleDeleteClick}>Delete</button>
 							</div>
 						</div>

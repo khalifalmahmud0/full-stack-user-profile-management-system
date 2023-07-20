@@ -15,7 +15,7 @@ const HomePage = () => {
 		process.env.NEXT_PUBLIC_API_URL + "users"
 	);
 
-
+	console.log(data);
 	return (
 		<Default>
 			<section id="homePage" className="Container">

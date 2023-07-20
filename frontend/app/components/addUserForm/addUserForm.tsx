@@ -5,6 +5,7 @@ import axios from "axios";
 import Image from "next/image";
 import cogoToast from "cogo-toast";
 import "./addUserForm.scss";
+import moment from "moment";
 const AddUserForm: React.FC = () => {
 	const createUserMutation = useMutation((newUserData: any) =>
 		axios.post("http://localhost:5000/api/v1/create-user", newUserData, {})
@@ -41,6 +42,7 @@ const AddUserForm: React.FC = () => {
 			email: formData.get("email"),
 			phone: formData.get("phone"),
 			dateOfBirth: formData.get("dateOfBirth"),
+			// dateOfBirth: formData.get("dateOfBirth"),
 			biography: formData.get("biography"),
 			address: formData.get("address"),
 			profilePicture: profilePictureBase64,
