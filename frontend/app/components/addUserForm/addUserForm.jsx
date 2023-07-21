@@ -14,7 +14,6 @@ const AddUserForm = () => {
 	const [showErrorToast, setShowErrorToast] = useState(false);
 	const [profilePictureBase64, setProfilePictureBase64] = useState("");
 	const [gender, setGender] = useState("male");
-
 	const handleProfilePictureChange = (event) => {
 		const file = event.target.files?.[0];
 		if (file) {
@@ -27,11 +26,9 @@ const AddUserForm = () => {
 			};
 		}
 	};
-
 	const handleGenderChange = (event) => {
 		setGender(event.target.value);
 	};
-
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);

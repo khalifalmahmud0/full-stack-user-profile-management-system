@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const Layout = ({ children }) => {
@@ -6,14 +7,22 @@ const Layout = ({ children }) => {
 			<header id="header" className="Container py-10 xl:py-12 text-sm">
 				<div className="grid grid-cols-2 gap-y-8 justify-items-center md:justify-items-stretch md:items-center ">
 					<div className="col-span-2 md:col-span-1 text-center">
-						<p className="w-[288px] border-gray-400  px-3 py-4 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit rounded-xl border ">
-							User Profile Management System
-						</p>
+						<Link href={"/"}>
+							{/* <p className="w-[288px] border-gray-400  px-3 py-4 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit rounded-xl border ">
+								User Profile Management System ProfilesPlus
+							</p> */}
+							<Image
+								className="w-52"
+								width={100}
+								height={100}
+								src={"/logo.svg"}
+							/>
+						</Link>
 					</div>
 					<div className="col-span-2 md:col-span-1 text-center md:text-right">
 						<code className="font-bold">
-							<Link href={"#"}>All Users</Link> /{" "}
-							<Link href={"#"}>Add New User</Link>
+							<Link href={"/"}>All Users</Link> /{" "}
+							<Link href={"/add-user"}>Add New User</Link>
 						</code>
 					</div>
 				</div>
