@@ -1,8 +1,7 @@
 {
-	"compilerOptions": {
-		"paths": {
-			"@/*": ["./*"],
-			"@scss/*": ["/assets/scss/*"]
-		}
-	}
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
 }

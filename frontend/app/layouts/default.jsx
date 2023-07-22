@@ -8,12 +8,10 @@ const Layout = ({ children }) => {
 				<div className="grid grid-cols-2 gap-y-8 justify-items-center md:justify-items-stretch md:items-center ">
 					<div className="col-span-2 md:col-span-1 text-center">
 						<Link href={"/"}>
-							{/* <p className="w-[288px] border-gray-400  px-3 py-4 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit rounded-xl border ">
-								User Profile Management System ProfilesPlus
-							</p> */}
 							<Image
-								className="w-52"
+								className="w-52 dark:invert"
 								width={100}
+								alt="Site Logo"
 								height={100}
 								src={"/logo.svg"}
 							/>

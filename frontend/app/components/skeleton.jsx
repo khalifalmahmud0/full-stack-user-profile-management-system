@@ -1,8 +1,7 @@
-import { Skeleton, SkeletonTheme } from "@/app/import/packages";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import "./skeleton.scss";
 
-const RectangleSkeleton = ({
+const LoadingSkeleton = ({
 	width = "100%",
 	height = 15,
 	count = 1,
@@ -21,4 +20,4 @@ const RectangleSkeleton = ({
 	);
 };
 
-export default RectangleSkeleton;
+export default LoadingSkeleton;
