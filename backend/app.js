@@ -24,8 +24,8 @@ app.use([
 		max: process.env.RATE_LIMIT_MAX_REQUEST_PER_WINDOW_MS,
 	}),
 	// Others
-	express.json({ limit: "500mb" }),
-	express.urlencoded({ limit: "500mb", extended: true }), // Set the "extended" option to true
+	express.json({ limit: "1gb" }),
+	express.urlencoded({ limit: "1gb", extended: true }), // Set the "extended" option to true
 ]);
 // Route
 app.use("/api/v1", require("./src/routes/api")).use("*", (req, res) => {
