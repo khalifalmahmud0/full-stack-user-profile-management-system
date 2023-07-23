@@ -342,11 +342,22 @@ const UserForm = ({ type, params }) => {
 					<div className="flex flex-row justify-end items-center">
 						<button
 							type="submit"
-							className="Darkmode w-full md:w-max rounded-md bg-indigo-600 px-12 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+							{...((type === "EDIT"
+								? updateUserMutation.isLoading
+								: createUserMutation.isLoading) && { disabled: true })}
+							className={`Darkmode w-full md:w-max rounded-md bg-indigo-600 px-12 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
+								(
+									type === "EDIT"
+										? updateUserMutation.isLoading
+										: createUserMutation.isLoading
+								)
+									? "cursor-not-allowed"
+									: ""
+							}`}
 						>
 							{type === "EDIT"
 								? updateUserMutation.isLoading
-									? "Updating..."
+									? `Updating...`
 									: "Update Now"
 								: createUserMutation.isLoading
 								? "Adding User ..."
