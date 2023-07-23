@@ -51,7 +51,7 @@ const Home = () => {
 						</div>
 					)
 				) : (
-					Array.from({ length: 6 }, (_, index) => (
+					Array.from({ length: 12 }, (_, index) => (
 						<ProfileBox key={index} loading={isLoading} />
 					))
 				)}
