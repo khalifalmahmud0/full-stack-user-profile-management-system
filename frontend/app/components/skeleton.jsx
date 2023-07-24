@@ -9,8 +9,8 @@ const LoadingSkeleton = ({
 }) => {
 	return (
 		<SkeletonTheme
-			baseColor="#202020"
-			highlightColor="#444"
+			baseColor="#F2F2F2"
+			highlightColor="#E0E0E0"
 			width={width}
 			height={height}
 			duration={2.5}

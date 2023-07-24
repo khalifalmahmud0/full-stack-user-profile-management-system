@@ -76,14 +76,13 @@ const SingleUser = ({ params }) => {
 			<Heading>
 				Explore{" "}
 				{!isLoading ? (
-					result?.name
+					result?.name + `'s `
 				) : (
 					<>
-						{" "}
-						<LoadingSkeleton height={25} width={150} />
+						<LoadingSkeleton height={25} width={70} />
 					</>
 				)}
-				's Universe
+				Universe
 			</Heading>
 			<div className="Darkmode grid grid-cols-12 bg-white shadow-lg px-4 py-10 md:p-16 rounded-lg items-center gap-y-2">
 				{/* Email - Mobile  */}
@@ -198,7 +197,7 @@ const SingleUser = ({ params }) => {
 						)
 					) : (
 						<p className="flex justify-center">
-							<LoadingSkeleton height={25} width={150} />
+							<LoadingSkeleton height={25} width={125} />
 						</p>
 					)}
 
@@ -219,7 +218,7 @@ const SingleUser = ({ params }) => {
 						)
 					) : (
 						<p className="flex justify-center">
-							<LoadingSkeleton height={25} width={150} />
+							<LoadingSkeleton height={25} width={100} />
 						</p>
 					)}
 
@@ -240,7 +239,7 @@ const SingleUser = ({ params }) => {
 						)
 					) : (
 						<p className="flex justify-center">
-							<LoadingSkeleton height={25} width={150} />
+							<LoadingSkeleton height={25} width={180} />
 						</p>
 					)}
 				</div>
@@ -255,7 +254,9 @@ const SingleUser = ({ params }) => {
 					)
 				) : (
 					<div className="col-span-12 order-6 text-center md:order-6 border-t-2 pt-3 mt-3 md:pt-4 xl:pt-6 2xl:pt-8 md:mt-8">
-						<LoadingSkeleton height={25} width={150} />
+						<LoadingSkeleton height={25} width={100} />
+						<LoadingSkeleton height={25} width={250} />
+						<LoadingSkeleton height={25} width={100} />
 					</div>
 				)}
 			</div>
