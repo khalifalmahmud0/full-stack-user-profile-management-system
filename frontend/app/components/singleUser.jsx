@@ -11,8 +11,15 @@ import axios from "axios";
 import { redirect } from "next/navigation";
 import LoadingSkeleton from "./skeleton";
 
+/**
+ * Renders the single user component.
+ *
+ * @param {Object} params - The parameters object.
+ * @param {string} params.id - The ID of the user.
+ * @return {JSX.Element} The JSX element representing the single user component.
+ */
 const SingleUser = ({ params }) => {
-	// Format Date
+	// Function to format date in a specific format
 	function formatDate(dateString) {
 		const options = { day: "numeric", month: "long", year: "numeric" };
 		const formattedDate = new Date(dateString).toLocaleDateString(
@@ -21,14 +28,14 @@ const SingleUser = ({ params }) => {
 		);
 		return formattedDate;
 	}
-	// :::::::::: API CALL ::::::::::
-	// Get this User Data
+	// Fetch the data of this user using the 'GetData' function
 	const { data, isLoading } = GetData(
 		`users-${params?.id}`,
 		process.env.NEXT_PUBLIC_API_URL + "single-user/" + params?.id
 	);
 	let result = data?.result?.success;
-	// Delete this User
+
+	// Create a mutation hook 'deleteUserMutation' to handle user deletion
 	const deleteUserMutation = useMutation((userId) => {
 		return axios.delete(
 			`${process.env.NEXT_PUBLIC_API_URL}delete-user/${userId}`
@@ -38,6 +45,8 @@ const SingleUser = ({ params }) => {
 	// UseState & UseEffect = Related With User Delete Functionality
 	const [showSuccessToast, setShowSuccessToast] = useState(false);
 	const [showErrorToast, setShowErrorToast] = useState(false);
+
+	// Set up an effect to show success or error toasts when user deletion succeeds or fails
 	useEffect(() => {
 		if (deleteUserMutation.isSuccess && !showSuccessToast) {
 			cogoToast.success("User deletion successful!");
@@ -55,7 +64,7 @@ const SingleUser = ({ params }) => {
 		showErrorToast,
 	]);
 
-	// Delete User Popup
+	// Function to show a confirmation popup when the user clicks the delete button
 	const deleteUser = () => {
 		Swal.fire({
 			title: "Are you sure?",
@@ -67,10 +76,13 @@ const SingleUser = ({ params }) => {
 			confirmButtonText: "Yes, delete it!",
 		}).then((result) => {
 			if (result.isConfirmed) {
+				// If the user confirms deletion, call the 'deleteUserMutation' hook with the user ID
 				deleteUserMutation.mutate(params.id);
 			}
 		});
 	};
+
+	// Return the JSX for the 'SingleUser' component
 	return (
 		<section id="singleUserComponent" className="Container ">
 			<Heading>
@@ -84,7 +96,7 @@ const SingleUser = ({ params }) => {
 				)}
 				Universe
 			</Heading>
-			<div className="Darkmode grid grid-cols-12 bg-white shadow-lg px-4 py-10 md:p-16 rounded-lg items-center gap-y-2">
+			<div className="darkMode grid grid-cols-12 bg-white shadow-lg px-4 py-10 md:p-16 rounded-lg items-center gap-y-2">
 				{/* Email - Mobile  */}
 				<div className="col-span-12 order-4 text-center md:col-span-4 md:order-1 space-y-1 pt-1 ">
 					{!isLoading ? (
@@ -128,7 +140,6 @@ const SingleUser = ({ params }) => {
 				{/* Profile Image  */}
 				<div className="col-span-12 order-2 py-5 md:col-span-4 md:order-2">
 					{!isLoading ? (
-						// block mx-auto
 						<Image
 							className={`block mx-auto w-28 h-28 rounded-full ${
 								result?.profilePicture ? "" : "dark:invert"

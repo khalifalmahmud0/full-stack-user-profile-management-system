@@ -1,6 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
+/**
+ * Renders the layout component.
+ *
+ * @param {object} children - The children components to be rendered inside the layout.
+ * @return {JSX.Element} The rendered layout component.
+ */
 const Layout = ({ children }) => {
 	return (
 		<div className="min-h-screen relative font-mono">

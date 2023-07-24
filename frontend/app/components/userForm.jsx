@@ -7,9 +7,12 @@ import Heading from "./mini/heading";
 import cogoToast from "cogo-toast";
 import { GetData } from "../utils/getApiData";
 const UserForm = ({ type, params }) => {
+	// Create a mutation hook 'createUserMutation' to handle user creation
 	const createUserMutation = useMutation((newUserData) =>
 		axios.post(`${process.env.NEXT_PUBLIC_API_URL}create-user`, newUserData, {})
 	);
+
+	// Create a mutation hook 'updateUserMutation' to handle user update
 	const updateUserMutation = useMutation((newUserData) =>
 		axios.put(
 			`${process.env.NEXT_PUBLIC_API_URL}update-user/${params.id}`,
@@ -17,7 +20,8 @@ const UserForm = ({ type, params }) => {
 			{}
 		)
 	);
-	// global Form Data
+
+	// Set up state for form data using 'useState' hook
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
@@ -28,14 +32,17 @@ const UserForm = ({ type, params }) => {
 		profilePicture: "",
 		gender: "male",
 	});
-	// Edit Page a User Data Update
+
+	// Execute the following block if the 'type' prop is set to "EDIT"
 	if (type === "EDIT") {
+		// Fetch user data using 'GetData' function
 		const { data } = GetData(
-			"users",
+			`users-${params?.id}`,
 			process.env.NEXT_PUBLIC_API_URL + "single-user/" + params.id
 		);
 		let user = data?.result?.success;
 
+		// Set up an effect using 'useEffect' hook to update the form data with the user's information
 		useEffect(() => {
 			if (user) {
 				setFormData({
@@ -51,7 +58,8 @@ const UserForm = ({ type, params }) => {
 			}
 		}, [user]);
 	}
-	// Handle Image Upload
+
+	// Function to handle image upload and update 'profilePicture' in the form data
 	const handleProfilePictureChange = (event) => {
 		const file = event.target.files?.[0];
 		if (file) {
@@ -64,26 +72,28 @@ const UserForm = ({ type, params }) => {
 			};
 		}
 	};
-	// Handle Gender
+
+	// Function to handle gender selection and update 'gender' in the form data
 	const handleGenderChange = (event) => {
 		setFormData({ ...formData, gender: event.target.value });
 	};
-	// Handle Form Submit
+
+	// Function to handle form submission
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		const xformData = new FormData(event.currentTarget);
+		const inputFieldData = new FormData(event.currentTarget);
 		const newUserData = {
-			name: xformData.get("name"),
-			email: xformData.get("email"),
-			phone: xformData.get("phone"),
-			dateOfBirth: xformData.get("dateOfBirth"),
-			biography: xformData.get("biography"),
-			address: xformData.get("address"),
+			name: inputFieldData.get("name"),
+			email: inputFieldData.get("email"),
+			phone: inputFieldData.get("phone"),
+			dateOfBirth: inputFieldData.get("dateOfBirth"),
+			biography: inputFieldData.get("biography"),
+			address: inputFieldData.get("address"),
 			profilePicture: formData.profilePicture,
-			gender: xformData.get("gender"),
+			gender: inputFieldData.get("gender"),
 		};
-		console.log(newUserData);
 		if (type === "ADD") {
+			// If type is "ADD", create a new user using the 'createUserMutation' hook and reset the form data
 			createUserMutation.mutate(newUserData);
 			setFormData({
 				name: "",
@@ -97,12 +107,16 @@ const UserForm = ({ type, params }) => {
 			});
 		}
 		if (type === "EDIT") {
+			// If type is "EDIT", update the user using the 'updateUserMutation' hook
 			updateUserMutation.mutate(newUserData);
 		}
 	};
-	// Show Toast
+
+	// Set up state for showing success and error toasts using 'useState' hook
 	const [showSuccessToast, setShowSuccessToast] = useState(false);
 	const [showErrorToast, setShowErrorToast] = useState(false);
+
+	// Set up an effect to show success or error toasts when mutations succeed or fail
 	useEffect(() => {
 		if (createUserMutation.isSuccess && !showSuccessToast) {
 			cogoToast.success("User created successfully!");
@@ -135,6 +149,8 @@ const UserForm = ({ type, params }) => {
 		updateUserMutation.isError,
 		showErrorToast,
 	]);
+
+	// Return the JSX for the 'UserForm' component
 	return (
 		<section id="userFormComponent" className="Container">
 			<Heading>
@@ -144,7 +160,7 @@ const UserForm = ({ type, params }) => {
 			</Heading>
 			<form
 				onSubmit={handleSubmit}
-				className="Darkmode mx-auto bg-white rounded-xl shadow-lg px-4 py-10 md:p-16 rounded-lg"
+				className="darkMode mx-auto bg-white rounded-xl shadow-lg px-4 py-10 md:p-16 rounded-lg"
 			>
 				<div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
 					{/* Name  */}
@@ -165,7 +181,7 @@ const UserForm = ({ type, params }) => {
 								name="name"
 								placeholder='Enter your name... (e.g., "John Smith")'
 								required
-								className="Darkmode rounded-md border-0 px-3.5 h-[50px]  shadow-sm w-full ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+								className="darkMode rounded-md border-0 px-3.5 h-[50px]  shadow-sm w-full ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
 							/>
 						</div>
 					</div>
@@ -187,7 +203,7 @@ const UserForm = ({ type, params }) => {
 								type="tel"
 								placeholder='Enter your phone number...(e.g. "+8801XXXXXXXXX")'
 								pattern="^\+8801[0-9]{9}$"
-								className="Darkmode rounded-md border-0 px-3.5 h-[50px]  shadow-sm w-full ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+								className="darkMode rounded-md border-0 px-3.5 h-[50px]  shadow-sm w-full ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
 								maxLength={14}
 							/>
 						</div>
@@ -212,7 +228,7 @@ const UserForm = ({ type, params }) => {
 								}
 								name="dateOfBirth"
 								type="date"
-								className="Darkmode rounded-md border-0 px-3.5 h-[50px]  shadow-sm w-full ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+								className="darkMode rounded-md border-0 px-3.5 h-[50px]  shadow-sm w-full ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
 							/>
 						</div>
 					</div>
@@ -229,7 +245,7 @@ const UserForm = ({ type, params }) => {
 								value={formData?.gender}
 								onChange={handleGenderChange}
 								name="gender"
-								className="Darkmode rounded-md border-0 px-3.5 h-[50px]  shadow-sm w-full ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+								className="darkMode rounded-md border-0 px-3.5 h-[50px]  shadow-sm w-full ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
 							>
 								<option value="male">Male</option>
 								<option value="female">Female</option>
@@ -254,7 +270,7 @@ const UserForm = ({ type, params }) => {
 								type="email"
 								placeholder='Your email address here...(e.g., "john.smith@example.com")'
 								required
-								className="Darkmode rounded-md border-0 px-3.5 h-[50px]  shadow-sm w-full ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+								className="darkMode rounded-md border-0 px-3.5 h-[50px]  shadow-sm w-full ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
 							/>
 						</div>
 					</div>
@@ -275,7 +291,7 @@ const UserForm = ({ type, params }) => {
 								name="address"
 								type="text"
 								placeholder='Please provide your complete address... (e.g., "123 Main Street, Anytown, USA")'
-								className="Darkmode rounded-md border-0 px-3.5 h-[50px]  shadow-sm w-full ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+								className="darkMode rounded-md border-0 px-3.5 h-[50px]  shadow-sm w-full ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
 							/>
 						</div>
 					</div>
@@ -296,7 +312,7 @@ const UserForm = ({ type, params }) => {
 								placeholder='Share your story and achievements with us... (e.g., "Passionate about technology and innovation, with a track record of leading successful projects in the IT industry.")'
 								name="biography"
 								rows={4}
-								className="Darkmode block w-full rounded-md border-0 px-3.5 py-2  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+								className="darkMode block w-full rounded-md border-0 px-3.5 py-2  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 							/>
 						</div>
 					</div>
@@ -345,7 +361,7 @@ const UserForm = ({ type, params }) => {
 							{...((type === "EDIT"
 								? updateUserMutation.isLoading
 								: createUserMutation.isLoading) && { disabled: true })}
-							className={`Darkmode w-full md:w-max rounded-md bg-indigo-600 px-12 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
+							className={`darkMode w-full md:w-max rounded-md bg-indigo-600 px-12 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
 								(
 									type === "EDIT"
 										? updateUserMutation.isLoading

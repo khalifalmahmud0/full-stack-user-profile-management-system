@@ -10,6 +10,10 @@ _A web application built with Tailwind CSS, JavaScript NextJs for the front end,
 - **API Requests**: Axios
 - **Data Management**: React Query
 
+### API Documentation
+
+For detailed API documentation, please refer to the [ProfilesPlus API Documentation][APIDOC]
+
 ### Getting Started
 
 To get started, you need to clone the project repository using the following command:
@@ -55,3 +59,5 @@ This project is licensed under the MIT License.
 ### Contact
 
 If you have any questions or need further assistance, you can reach out to the project owner at almahmudkhalif@gmail.com
+
+[APIDOC]: https://documenter.getpostman.com/view/28312754/2s946maA1i

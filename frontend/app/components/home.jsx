@@ -4,36 +4,43 @@ import Heading from "./mini/heading";
 import { GetData } from "../utils/getApiData";
 import LoadingSkeleton from "./skeleton";
 import ProfileBox from "./mini/profileBox";
-import { useEffect, useState } from "react";
+
+/**
+ * Renders the Home component.
+ *
+ * @returns {JSX.Element} The rendered Home component.
+ */
 const Home = () => {
+	// Fetch user data using the 'GetData' function
 	const { data, isLoading } = GetData(
 		"users",
 		process.env.NEXT_PUBLIC_API_URL + "users"
 	);
-	// let result = data?.result?.success;
-	const [udata, setUdata] = useState([]);
-	useEffect(() => {
-		setUdata(data);
-	}, [data]);
-	let result = udata?.result?.success;
+	let result = data?.result?.success;
+
+	// Return the JSX for the 'Home' component
 	return (
 		<section id="homeComponent" className="Container">
+			{/* Render the heading */}
 			<Heading>
 				Meet Our Users (
 				{!isLoading ? (
-					result?.length
+					result?.length // Display the number of users if data is loaded
 				) : (
-					<LoadingSkeleton width="30px" height={"30px"} />
+					<LoadingSkeleton width="30px" height={"30px"} /> // Display a loading skeleton while data is being fetched
 				)}
 				)
 			</Heading>
 			<div className="grid grid-cols-12 gap-y-4 md:gap-6 ">
 				{!isLoading ? (
-					result?.length > 0 ? (
+					// If data is loaded and it's an array with at least one user
+					Array.isArray(result) && result?.length > 0 ? (
+						// Render the user profiles using the 'ProfileBox' component
 						result?.map((item, index) => {
 							return <ProfileBox key={index} item={item} />;
 						})
 					) : (
+						// If no users are found, display a message
 						<div className="col-span-12 text-center sm:text-left">
 							<p className="font-bold">No Users Found, Yet!</p>
 							<br />
@@ -51,6 +58,7 @@ const Home = () => {
 						</div>
 					)
 				) : (
+					// While data is loading, display loading skeletons
 					Array.from({ length: 12 }, (_, index) => (
 						<ProfileBox key={index} loading={isLoading} />
 					))
@@ -59,5 +67,4 @@ const Home = () => {
 		</section>
 	);
 };
-
 export default Home;
